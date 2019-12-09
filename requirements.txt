@@ -5,3 +5,4 @@ flask_restplus==0.13.0
 pandas==0.25.3
 Werkzeug==0.16.0
 gunicorn
+flask-cors

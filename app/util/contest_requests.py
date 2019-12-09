@@ -146,19 +146,23 @@ def get_contest_user_ranking(contest_num, users):
 
 
 def main(contest_num, users):
+    import time
+    t0 = time.time()
     cont_obj = get_contest_user_ranking(contest_num, users)
+    t1 = time.time()
+    print(f'It took {t1-t0} sec to crawl')
     df = format_data(cont_obj.user_ranks, cont_obj.questions,
                      cont_obj.start_time, cont_obj.participated_user_num)
     print(
         f'participated user num: {cont_obj.participated_user_num}, ' + \
         f'registered user num: {cont_obj.registered_user_num}'
     )
-    pprint(cont_obj.user_ranks[0])
+    # pprint(cont_obj.user_ranks[0])
     print(df)
     df.to_csv(f'{contest_num}.csv')
 
 if __name__ == '__main__':
-    contest_num = 'weekly-contest-165'
+    contest_num = 'weekly-contest-166'
     # contest_num = 'biweekly-contest-14'
     users = {
         'qd452', 'guoqiang2648', 'thread_start', 'liu_diansheng', 'sylyongli',
