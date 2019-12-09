@@ -60,6 +60,7 @@ class ContestUserRanks(Resource):
     @contest_ns.marshal_list_with(contest)
     def get(self, contest_num):
         '''get contest ranking'''
+        contest_num = contest_num.lower()
         if contest_num not in CONTEST_CACHE:
             contest = get_contest(contest_num)
             # print(json.dumps(asdict(contest), indent=4))
@@ -75,5 +76,6 @@ class ContestUserRanks(Resource):
                 'registered_user_num'] // 25
             user_ranks = get_user_ranking(contest_num, total_pages, user_names)
             sorted(user_ranks, key=lambda x: x['rank']['rank'])
+            print(user_ranks)
             CONTEST_CACHE[contest_num]['user_ranks'] = user_ranks
         return CONTEST_CACHE[contest_num]

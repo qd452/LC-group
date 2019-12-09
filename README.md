@@ -13,10 +13,16 @@ python web_runner.py
 
 To deactivate, just run `deactivate`
 
+### Fronten
+
+```sh
+npm start
+npm run build # to create a production build,
+```
 
 
 ## REST API
 
-http://127.0.0.1:5000/
+http://127.0.0.1:5000/api/v0/
 
-http://127.0.0.1:5000/swagger.json
+http://127.0.0.1:5000/api/v0/swagger.json
