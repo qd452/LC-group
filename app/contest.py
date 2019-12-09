@@ -61,6 +61,8 @@ class ContestUserRanks(Resource):
     def get(self, contest_num):
         '''get contest ranking'''
         contest_num = contest_num.lower()
+        # todo: sorting issue after deploy to heroku
+        # need to use redis for caching
         if contest_num not in CONTEST_CACHE:
             contest = get_contest(contest_num)
             # print(json.dumps(asdict(contest), indent=4))

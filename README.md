@@ -23,6 +23,12 @@ npm run build # to create a production build,
 
 ## REST API
 
+**Local**
+
 http://127.0.0.1:5000/api/v0/
 
 http://127.0.0.1:5000/api/v0/swagger.json
+
+**Remote**
+
+https://lcgroup.herokuapp.com/api/v0/
