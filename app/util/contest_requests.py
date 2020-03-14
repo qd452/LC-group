@@ -57,12 +57,14 @@ def get_user_info(user):
     soup = BeautifulSoup(r.content, 'html.parser')
     list_group_item = soup.findAll(class_='list-group-item')
     rating_obj = next(x for x in list_group_item if 'Rating' in x.text)
+    ranking_obj = next(x for x in list_group_item if 'Global Ranking' in x.text)
     solved_questions_obj = next(x for x in list_group_item
                                 if 'Solved Question' in x.text)
     rating = rating_obj.find('span').text.strip()
+    ranking = ranking_obj.find('span').text.strip().split('/')[0].strip()
     solved_questions = solved_questions_obj.find('span').text.strip().split(
         '/')[0].strip()
-    return rating, solved_questions
+    return rating, solved_questions, ranking
 
 
 def format_data(users, questions_dct, start_time, participated_user_num):
@@ -89,9 +91,10 @@ def format_data(users, questions_dct, start_time, participated_user_num):
                 pass
             df_dct[q_title].append(contents)
         df_dct['pagination'].append(rank // 25 + 1)
-        rating, solved_questions = get_user_info(username)
+        rating, solved_questions, global_ranking = get_user_info(username)
         df_dct['rating'].append(rating)
         df_dct['solved_questions'].append(solved_questions)
+        df_dct['global_ranking'].append(global_ranking)
     df = pd.DataFrame(df_dct)
     df.sort_values(by=['rank'], inplace=True)
     return df
@@ -162,12 +165,13 @@ def main(contest_num, users):
     df.to_csv(f'{contest_num}.csv')
 
 if __name__ == '__main__':
-    contest_num = 'weekly-contest-166'
-    # contest_num = 'biweekly-contest-14'
+    contest_num = 'weekly-contest-179'
+    # contest_num = 'biweekly-contest-21'
     users = {
         'qd452', 'guoqiang2648', 'thread_start', 'liu_diansheng', 'sylyongli',
         'lijiang3800045', 'jessica_x_1028', 'lqianzhen', 'coffeebenzene',
-        'gohuishan', 'M00nwell', 'pumbaa5', 'farmerboy'
+        'gohuishan', 'M00nwell', 'pumbaa5', 'farmerboy', 'huahualeetcode',
+        'Tatami', 'ben100'
     }
     # contest = get_contest(contest_num)
     # pprint(asdict(contest))
