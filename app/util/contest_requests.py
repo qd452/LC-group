@@ -91,7 +91,10 @@ def format_data(users, questions_dct, start_time, participated_user_num):
                 pass
             df_dct[q_title].append(contents)
         df_dct['pagination'].append(rank // 25 + 1)
-        rating, solved_questions, global_ranking = get_user_info(username)
+        try:
+            rating, solved_questions, global_ranking = get_user_info(username)
+        except:
+            ratiing, solved_questions, global_ranking = None, None, None
         df_dct['rating'].append(rating)
         df_dct['solved_questions'].append(solved_questions)
         df_dct['global_ranking'].append(global_ranking)
@@ -165,16 +168,25 @@ def main(contest_num, users):
     df.to_csv(f'{contest_num}.csv')
 
 if __name__ == '__main__':
-    contest_num = 'weekly-contest-179'
-    # contest_num = 'biweekly-contest-21'
+    contest_num = 'weekly-contest-186'
+    # contest_num = 'biweekly-contest-24'
+    users_sg = {'tonghuikang', 'zwliew', 'zyb12269205',
+        'seriallazer', 'tang0404', 'pvtuan10', 'evan_hossain',
+        'kRRRonos', 'tbthanh90', 'allegri',  'Sun_WuKong', 
+        'ndkhanh792000', 'fanstyle', 'paradite', 'shiro_o', 
+        'qd452', 'guoqiang2648', 'thread_start', 'liu_diansheng', 'sylyongli',
+        'lijiang3800045', 'jessica_x_1028', 'lqianzhen', 'coffeebenzene',
+        'gohuishan', 'M00nwell', 'pumbaa5', 'farmerboy', 'huahualeetcode',
+        'Tatami', 'ben100', 'yisheng', 'mathmax', 'meng2'
+        }
     users = {
         'qd452', 'guoqiang2648', 'thread_start', 'liu_diansheng', 'sylyongli',
         'lijiang3800045', 'jessica_x_1028', 'lqianzhen', 'coffeebenzene',
         'gohuishan', 'M00nwell', 'pumbaa5', 'farmerboy', 'huahualeetcode',
-        'Tatami', 'ben100'
+        'Tatami', 'ben100', 'yisheng', 'meng2', 'mathmax'
     }
     # contest = get_contest(contest_num)
     # pprint(asdict(contest))
-    main(contest_num, users)
-
+    # main(contest_num, users)
+    main(contest_num, users_sg) 
     # get_user_info('qd452')
